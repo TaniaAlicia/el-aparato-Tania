@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @RestController
 public class VentaController {
 
@@ -30,9 +32,9 @@ public class VentaController {
     }
 
     //Modificar los datos de una venta
-    @PutMapping("/ventas/edit")
-    public String editVenta(@RequestBody Venta vent) {
-        ventServ.editVenta(vent);
+    @PutMapping("/ventas/update")
+    public String updateVenta(@RequestBody Venta vent) {
+        ventServ.updateVenta(vent);
         return "Venta editada correctamente";
     }
 

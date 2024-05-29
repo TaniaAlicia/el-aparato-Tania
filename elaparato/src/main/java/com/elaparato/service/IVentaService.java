@@ -2,6 +2,7 @@ package com.elaparato.service;
 
 import com.elaparato.model.Producto;
 import com.elaparato.model.Venta;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public interface IVentaService {
 
     public Venta findVenta(int id);
 
-    public void editVenta(Venta vent);
+    public Venta updateVenta(Venta vent);
+
 
 }
