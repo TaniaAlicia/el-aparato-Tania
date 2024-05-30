@@ -10,7 +10,7 @@ import java.util.List;
 public class Venta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //para que no lo haga aleatoreo
     private int id_venta;
 
     private Date fecha;

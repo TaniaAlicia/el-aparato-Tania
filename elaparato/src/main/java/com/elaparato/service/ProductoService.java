@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductoService implements IProductoService{
@@ -28,9 +29,9 @@ public class ProductoService implements IProductoService{
     }
 
     @Override
-    public Producto findProducto(int id) {
+    public Optional<Producto> findProducto(int id) {
 
-        return prodRepo.findById(id).orElse(null);
+        return Optional.ofNullable(prodRepo.findById(id).orElse(null));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.elaparato.service;
 import com.elaparato.model.Producto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IProductoService {
 
@@ -12,7 +13,7 @@ public interface IProductoService {
 
     public void deleteProducto(int id);
 
-    public Producto findProducto(int id);
+    public Optional<Producto> findProducto(int id);
 
     public void editProducto(Producto prod);
 

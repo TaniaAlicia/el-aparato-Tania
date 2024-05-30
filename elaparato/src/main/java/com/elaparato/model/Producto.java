@@ -12,11 +12,11 @@ import java.util.List;
 @Entity
 public class Producto {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String nombre;
     private String descripcion;
-    private int precio;
+    private double precio;
     private int cantidad;
 
     @ManyToMany
