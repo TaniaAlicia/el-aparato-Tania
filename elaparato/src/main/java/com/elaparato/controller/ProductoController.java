@@ -1,6 +1,7 @@
 package com.elaparato.controller;
 import com.elaparato.model.Producto;
 import com.elaparato.service.IProductoService;
+import com.elaparato.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +14,9 @@ import java.util.Optional;
 public class ProductoController {
 
     @Autowired
-    private IProductoService prodServ;
+    private ProductoService prodServ;
 
-    //OK con SEQUENCE pero pone id -43 con identity en el modelo me da error lo mismo poniendo id como no
+    //OK con SEQUENCE
     @PostMapping("/productos/create")
     public String createProducto(@RequestBody Producto prod) {prodServ.saveProducto(prod);
         return "Producto creado correctamente";

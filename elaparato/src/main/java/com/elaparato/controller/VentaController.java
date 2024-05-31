@@ -2,57 +2,54 @@ package com.elaparato.controller;
 
 import com.elaparato.model.Venta;
 import com.elaparato.service.IVentaService;
+import com.elaparato.service.VentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@RequestMapping("/ventas")
 public class VentaController {
 
-
     @Autowired
-    private IVentaService ventServ;
+    private VentaService ventServ;
 
-    //crear una nueva venta
-    @PostMapping("/ventas/create") //Errorupdate
-    public String createVenta(@RequestBody Venta vent) {
+    // Crear una nueva venta
+    @PostMapping("/create")
+    public ResponseEntity<String> createVenta(@RequestBody Venta vent) {
         ventServ.saveVenta(vent);
-        return "Venta creada correctamente";
+        return ResponseEntity.status(HttpStatus.CREATED).body("Venta creada correctamente");
     }
 
-    //obtener todas las ventas
-    @GetMapping("/ventas/getall") //OK
+    // Obtener todas las ventas
+    @GetMapping("/getall")  //-----OKK
     public List<Venta> getVentas () {
         return ventServ.getVentas();
     }
 
-    //Modificar los datos de una venta
-    @PutMapping("/ventas/update") //OK
-    public String updateVenta(@RequestBody Venta vent) {
+    // Modificar los datos de una venta
+    @PutMapping("/update")     //-----OKK
+    public ResponseEntity<String> updateVenta(@RequestBody Venta vent) {
         ventServ.updateVenta(vent);
-        return "Venta editada correctamente";
+        return ResponseEntity.ok("Venta editada correctamente");
     }
 
-
- @DeleteMapping("/ventas/delete/{id}") //Error
- public ResponseEntity<?> eliminarVenta(@PathVariable int id) {
-     ResponseEntity<?> response;
-     try {
-         Optional<Venta> ventaOptional = Optional.ofNullable(ventServ.findVenta(id));
-         if (ventaOptional.isPresent()) {
-             ventServ.deleteVenta(id);
-             response = ResponseEntity.status(HttpStatus.OK).body("Venta eliminada correctamente");
-         } else {
-             response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró ninguna venta con el ID proporcionado");
-         }
-     } catch (Exception e) {
-         response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al intentar eliminar la venta");
-     }
-     return response;
- }
-
+    // Eliminar una venta
+    @DeleteMapping("/delete/{id}") //---error
+    public ResponseEntity<String> eliminarVenta(@PathVariable int id) {
+        try {
+            Venta venta = ventServ.findVenta(id);
+            if (venta != null) {
+                ventServ.deleteVenta(id);
+                return ResponseEntity.ok("Venta eliminada correctamente");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró ninguna venta con el ID proporcionado");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al intentar eliminar la venta");
+        }
+    }
 }

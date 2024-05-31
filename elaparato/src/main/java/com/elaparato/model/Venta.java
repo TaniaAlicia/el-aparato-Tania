@@ -1,26 +1,34 @@
 package com.elaparato.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.util.Date;
 import java.util.List;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 public class Venta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //para que no lo haga aleatoreo
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id_venta;
 
     private Date fecha;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "venta_producto",
-            joinColumns = @JoinColumn(name = "id_venta"),
-            inverseJoinColumns = @JoinColumn(name = "id_producto")
-    )
-    private List<Producto> listaProductos;
-}
+    @OneToMany(mappedBy = "venta")
+    @JsonIgnore // Esto evita la serialización de la lista de ventasProductos en el JSON
+    private List<VentaProducto> ventasProductos;
 
+    public Venta() {
+    }
+
+    public Venta(int id_venta, Date fecha, List<VentaProducto> ventasProductos) {
+        this.id_venta = id_venta;
+        this.fecha = fecha;
+        this.ventasProductos = ventasProductos;
+    }
+}

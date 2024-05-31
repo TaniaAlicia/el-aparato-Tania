@@ -10,11 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VentaService implements IVentaService{
+public class VentaService implements IVentaService {
 
     @Autowired
     private IVentaRepository ventaRepository;
-
 
     @Override
     public List<Venta> getVentas() {
@@ -22,8 +21,8 @@ public class VentaService implements IVentaService{
     }
 
     @Override
-    public void saveVenta(Venta vent) {
-        ventaRepository.save(vent);
+    public void saveVenta(Venta venta) {
+        ventaRepository.save(venta);
     }
 
     @Override
@@ -33,24 +32,22 @@ public class VentaService implements IVentaService{
 
     @Override
     public Venta findVenta(int id) {
-       return ventaRepository.findById(id).orElse(null);
+        return ventaRepository.findById(id).orElse(null);
     }
 
     @Override
     @Transactional
-    public Venta updateVenta(Venta vent) {
-        Optional<Venta> optionalVenta = ventaRepository.findById(vent.getId_venta());
+    public Venta updateVenta(Venta ventaActualizada) {
+        Optional<Venta> optionalVenta = ventaRepository.findById(ventaActualizada.getId_venta());
         if (optionalVenta.isPresent()) {
             Venta venta = optionalVenta.get();
-            venta.setFecha(vent.getFecha());
-            venta.setListaProductos(vent.getListaProductos());
+            venta.setFecha(ventaActualizada.getFecha());
+            //actualizar la lista de productos asociados a la venta
+            venta.setVentasProductos(ventaActualizada.getVentasProductos());
             return ventaRepository.save(venta);
         } else {
-            throw new RuntimeException("No se encontró la venta con el ID" + vent.getId_venta());
+            throw new RuntimeException("No se encontró la venta con el ID " + ventaActualizada.getId_venta());
         }
     }
+}
 
-
-
-
-    }

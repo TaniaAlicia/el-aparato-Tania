@@ -12,30 +12,27 @@ import java.util.List;
 @Entity
 public class Producto {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String nombre;
     private String descripcion;
     private double precio;
     private int cantidad;
 
-    @ManyToMany
-    //@JoinColumn (name="id_venta")
-    @JsonIgnore //importante agregar para evitar errores de formato en la response
-    private List<Venta> listaVentas;
+    @OneToMany(mappedBy = "producto")
+    @JsonIgnore // Esto evita la serialización de la lista de ventasProductos en el JSON
+    private List<VentaProducto> ventasProductos;
 
     public Producto() {
     }
 
-    public Producto(int id, String nombre, String descripcion, int precio, int cantidad, List<Venta> listaVentas) {
+    public Producto(int id, String nombre, String descripcion, double precio, int cantidad, List<VentaProducto> ventasProductos) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.listaVentas = listaVentas;
+        this.ventasProductos = ventasProductos;
     }
-
-
-
 }
+
