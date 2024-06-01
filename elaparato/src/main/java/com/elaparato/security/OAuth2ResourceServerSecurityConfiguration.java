@@ -20,8 +20,8 @@ public class OAuth2ResourceServerSecurityConfiguration {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/ventas/**").hasAnyRole(repositor, admin)
-                                .requestMatchers("/productos/**").hasAnyRole(vendedor, admin)
+                                .requestMatchers("/ventas/**").hasAnyRole(vendedor, admin)
+                                .requestMatchers("/productos/**").hasAnyRole(repositor, admin)
                                 .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2ResourceServer ->

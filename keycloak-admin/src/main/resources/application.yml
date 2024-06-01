@@ -8,6 +8,6 @@ spring:
 dh:
   keycloak:
     serverUrl: http://localhost:8080
-    realm: gestion-usuarios
-    clientId: api-internal-users-client
-    clientSecret: r9kjki2527WL8TyPKNtk2ZjTSjBkzkEv
+    realm: el-aparato-trodriguez
+    clientId: rest-admin-client
+    clientSecret: fP8cw984pf9i5AgMfNiygcBJLc5Clewz
