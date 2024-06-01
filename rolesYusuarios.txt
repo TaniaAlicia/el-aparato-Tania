@@ -1,0 +1,11 @@
+tengo tres usuarios   reino : el-aparato-trodriguez
+
+admin  123  role de reino: app_administrador
+repo   123  role de reino: app_repositor
+vende  123  role de reino: app_vendedor
+
+
+2 clientes
+
+api-gateway-clientes
+rest-admin-client
