@@ -5,6 +5,7 @@ import com.elaparato.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class ProductoController {
 
     //obtener todos los productos
     @GetMapping("/productos/getall") //OK
+    //@PreAuthorize("hasAnyRole('app_repositor', 'app_admin')")
     public List<Producto> getProductos() {
         return prodServ.getProductos();
     }
