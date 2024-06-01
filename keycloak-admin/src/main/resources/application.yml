@@ -1,0 +1,13 @@
+server:
+  port: 8181
+
+spring:
+  application:
+    name: keycloak-admin
+
+dh:
+  keycloak:
+    serverUrl: http://localhost:8080
+    realm: gestion-usuarios
+    clientId: api-internal-users-client
+    clientSecret: r9kjki2527WL8TyPKNtk2ZjTSjBkzkEv
