@@ -12,35 +12,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ventas")
+@RequestMapping("/api")
 public class VentaController {
 
     @Autowired
     private VentaService ventServ;
 
     // Crear una nueva venta
-    @PostMapping("/create")
+    @PostMapping("/ventas/create")
     public ResponseEntity<String> createVenta(@RequestBody Venta vent) {
         ventServ.saveVenta(vent);
         return ResponseEntity.status(HttpStatus.CREATED).body("Venta creada correctamente");
     }
 
     // Obtener todas las ventas
-    @GetMapping("/getall")  //-----OKK
+    @GetMapping("/ventas/getall")  //-----OKK
     //@PreAuthorize("hasAnyRole('app_vendedor', 'app_admin')")
     public List<Venta> getVentas () {
         return ventServ.getVentas();
     }
 
     // Modificar los datos de una venta
-    @PutMapping("/update")     //-----OKK
+    @PutMapping("/ventas/update")     //-----OKK
     public ResponseEntity<String> updateVenta(@RequestBody Venta vent) {
         ventServ.updateVenta(vent);
         return ResponseEntity.ok("Venta editada correctamente");
     }
 
     // Eliminar una venta
-    @DeleteMapping("/delete/{id}") //---error
+    @DeleteMapping("/ventas/delete/{id}") //---error
     public ResponseEntity<String> eliminarVenta(@PathVariable int id) {
         try {
             Venta venta = ventServ.findVenta(id);
